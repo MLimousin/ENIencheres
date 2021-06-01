@@ -1,7 +1,11 @@
 package fr.eni.ENIencheres.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
+import fr.eni.ENIencheres.bll.ArticleVenduManager;
+import fr.eni.ENIencheres.bo.ArticleVendu;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,8 +24,13 @@ public class ServletRechercher extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArticleVenduManager articleVenduMgr = new ArticleVenduManager();
+		List<ArticleVendu> listeEncheres = articleVenduMgr.selectAll();				
+		
+		request.setAttribute("listeEncheres", listeEncheres);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

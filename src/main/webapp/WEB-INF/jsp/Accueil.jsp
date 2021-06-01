@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@page import="fr.eni.ENIencheres.bo.ArticleVendu" %>
+<%@page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +27,27 @@
 			</select>
 			<br>
 			<input type="submit" value="Rechercher">
+			<br><br><br>
+			
+
+			<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+			<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+				<c:choose>
+					<c:when test="${not empty listeEncheres && listeEncheres.size()>0}">
+						<c:forEach var="articleVendu" items="${listeEncheres}">
+							<ul>
+								<li>${articleVendu.nomArticle}</li>
+							
+								<li>Prix : ${articleVendu.miseAPrix} points</li>
+								<li>Fin de l'enchere : ${articleVendu.dateFinEncheres}</li>
+								<li> Vendeur : ${articleVendu.noUtilisateur}</li>								
+							</ul>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<p>Il n'y a aucun article en vente actuellement</p>
+					</c:otherwise>
+				</c:choose>				
 		</div>
 	</form>
 	
