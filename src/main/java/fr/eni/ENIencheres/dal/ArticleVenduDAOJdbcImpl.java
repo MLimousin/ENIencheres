@@ -4,11 +4,11 @@
 package fr.eni.ENIencheres.dal;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import fr.eni.ENIencheres.bo.ArticleVendu;
