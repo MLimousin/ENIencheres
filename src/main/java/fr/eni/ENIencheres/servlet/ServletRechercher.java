@@ -51,6 +51,7 @@ public class ServletRechercher extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("categorieChoisie", request.getParameter("categorieChoisie"));
+		request.getSession().setAttribute("filtreSaisie", request.getParameter("filtre"));
 		doGet(request,response);
 	}
 
