@@ -13,4 +13,23 @@
   	<servlet-name>Accueil</servlet-name>
   	<url-pattern>/Accueil</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>NouvelleVente</servlet-name>
+  	<jsp-file>/WEB-INF/jsp/NouvelleVente.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NouvelleVente</servlet-name>
+  	<url-pattern>/NouvelleVente</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ListeEncheres</servlet-name>
+  	<jsp-file>/WEB-INF/jsp/ListeEncheres.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ListeEncheres</servlet-name>
+  	<url-pattern>/ListeEncheres</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
