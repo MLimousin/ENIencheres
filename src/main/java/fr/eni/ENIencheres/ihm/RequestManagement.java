@@ -7,12 +7,12 @@ import java.util.List;
 
 import fr.eni.ENIencheres.bll.ArticleVenduManager;
 import fr.eni.ENIencheres.bll.BLLException;
+import fr.eni.ENIencheres.bll.CategorieManager;
+import fr.eni.ENIencheres.bll.EnchereManager;
+import fr.eni.ENIencheres.bll.RetraitManager;
 import fr.eni.ENIencheres.bll.UtilisateurManager;
 import fr.eni.ENIencheres.bo.ArticleVendu;
 import fr.eni.ENIencheres.dal.DALException;
-import fr.eni.projet_encheres.bll.CategorieManager;
-import fr.eni.projet_encheres.bll.EnchereManager;
-import fr.eni.projet_encheres.bll.RetraitManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
