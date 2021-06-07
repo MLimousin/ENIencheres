@@ -3,7 +3,6 @@
  */
 package fr.eni.ENIencheres.dal;
 
-
 /**
  * @author mariedebroise
  *
@@ -14,8 +13,14 @@ public abstract class DAOFactory {
 		return new ArticleVenduDAOJdbcImpl();
 	}
 	
-	public static CategorieDAO getCategorieDAO()
+public static CategorieDAO getCategorieDAO()
 	{
 		return new CategorieDAOJdbcImpl();
 	}
+
+	public static UtilisateurDAO getUtilisateurDAO() 
+	{
+        return new UtilisateurDAOJdbcImpl();
+    }
+
 }

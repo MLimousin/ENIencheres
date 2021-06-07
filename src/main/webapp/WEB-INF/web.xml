@@ -13,6 +13,7 @@
   	<servlet-name>Accueil</servlet-name>
   	<url-pattern>/Accueil</url-pattern>
   </servlet-mapping>
+
   
   <servlet>
   	<servlet-name>NouvelleVente</servlet-name>
