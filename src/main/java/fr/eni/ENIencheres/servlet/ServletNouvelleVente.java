@@ -9,7 +9,10 @@ import java.util.List;
 
 import fr.eni.ENIencheres.bll.ArticleVenduManager;
 import fr.eni.ENIencheres.bll.CategorieManager;
+import fr.eni.ENIencheres.bll.UtilisateurManager;
 import fr.eni.ENIencheres.bo.Categorie;
+import fr.eni.ENIencheres.bo.Utilisateur;
+import fr.eni.ENIencheres.dal.DALException;
 import fr.eni.ENIencheres.message.BusinessException;
 import fr.eni.ENIencheres.message.CodeErreur;
 import jakarta.servlet.RequestDispatcher;
@@ -71,10 +74,20 @@ public class ServletNouvelleVente extends HttpServlet {
 				{
 					listeCodeErreur.add(CodeErreur.ERREUR_PRIX);
 				}
-		int noUtilisateur = 1;
-		/*
-		 * !!!! Recupérer le numero d'utilisateur dans la base !!!!
-		 */
+		
+		int noUtilisateur=1;
+			/*
+			 * Récupérer le numéro de l'utilisateur depuis la page précédente pas encore créée
+			 */
+			
+		String rue = request.getParameter("rue");
+		String cp = request.getParameter("cp");
+		String ville = request.getParameter("ville");
+			if(rue.equals("") || cp.equals("") || ville.equals(""))
+			{
+				listeCodeErreur.add(CodeErreur.ERREUR_ADRESSE);
+			}
+			
 		int noCategorie = 0;
 			CategorieManager categorieMgr = new CategorieManager();
 			List<Categorie> listeCategorie = categorieMgr.selectAll();
