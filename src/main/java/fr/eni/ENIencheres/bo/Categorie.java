@@ -1,48 +1,53 @@
+
 package fr.eni.ENIencheres.bo;
 
 import java.io.Serializable;
 
+/**
+ * @author mariedebroise
+ *
+ */
 public class Categorie implements Serializable {
-    private int noCategorie;
-    private String libelle;
 
-    /**
-     * Constructeur sans paramètres
-     */
-    public Categorie() {
-    }
+	private static final long serialVersionUID = 1L;
+	
+	private int noCategorie;
+	private String libelleCategorie;
+	
+	/**
+	 * 
+	 */
+	public Categorie() {
 
-    /**
-     * Constructeur avec paramètres
-     * @param noCategorie  int
-     * @param libelle Can not exceed 30 characters
-     */
-    public Categorie(int noCategorie, String libelle) {
-        this.noCategorie = noCategorie;
-        this.libelle = libelle;
-    }
-
-    public int getNoCategorie() {
-        return noCategorie;
-    }
-
-    public void setNoCategorie(int noCategorie) {
-        this.noCategorie = noCategorie;
-    }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    @Override
-    public String toString() {
-        return "Categorie{" +
-                "noCategorie=" + noCategorie +
-                ", libelle='" + libelle + '\'' +
-                '}';
-    }
+	}
+	/**
+	 * @param libelleCategorie
+	 */
+	public Categorie(String libelleCategorie) {
+		this.libelleCategorie = libelleCategorie;
+	}
+	/**
+	 * @param noCategorie
+	 * @param libelleCategorie
+	 */
+	public Categorie(int noCategorie, String libelleCategorie) {
+		this.noCategorie = noCategorie;
+		this.libelleCategorie = libelleCategorie;
+	}
+	
+	/**
+	 * GETTER et SETTER
+	 */
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
+	}
+	public String getLibelleCategorie() {
+		return libelleCategorie;
+	}
+	public void setLibelleCategorie(String libelleCategorie) {
+		this.libelleCategorie = libelleCategorie;
+	}
 }

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +41,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			
 			String nomArticle = articleVendu.getNomArticle(); 
 			String description = articleVendu.getDescription();
-			Date dateDebutEncheres = articleVendu.getDateDebutEncheres();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String dateDebutEncheres = sdf.format(articleVendu.getDateDebutEncheres());
 			Date dateFinEncheres = articleVendu.getDateFinEncheres();
 			int miseAPrix = articleVendu.getMiseAPrix();
 			int noUtilisateur = articleVendu.getNoUtilisateur();
@@ -48,8 +50,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			
 			pstmt.setString(1, nomArticle);
 			pstmt.setString(2, description);
-			pstmt.setDate(3,(java.sql.Date) dateDebutEncheres);
-			pstmt.setDate(4, (java.sql.Date) dateFinEncheres);
+			pstmt.setString(3,  dateDebutEncheres);
+			pstmt.setDate(4, new java.sql.Date(dateFinEncheres.getTime()));
+			
 			pstmt.setInt(5, miseAPrix);
 			pstmt.setInt(6, noUtilisateur);
 			pstmt.setInt(7, noCategorie);

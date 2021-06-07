@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>ENIencheres</display-name>
   <welcome-file-list>
-    <welcome-file>/WEB-INF/jsp/Accueil.jsp</welcome-file>
+    <welcome-file>ServletRechercher</welcome-file>
   </welcome-file-list>
   
   <servlet>
@@ -13,4 +13,24 @@
   	<servlet-name>Accueil</servlet-name>
   	<url-pattern>/Accueil</url-pattern>
   </servlet-mapping>
+
+  
+  <servlet>
+  	<servlet-name>NouvelleVente</servlet-name>
+  	<jsp-file>/WEB-INF/jsp/NouvelleVente.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NouvelleVente</servlet-name>
+  	<url-pattern>/NouvelleVente</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ListeEncheres</servlet-name>
+  	<jsp-file>/WEB-INF/jsp/ListeEncheres.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ListeEncheres</servlet-name>
+  	<url-pattern>/ListeEncheres</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
