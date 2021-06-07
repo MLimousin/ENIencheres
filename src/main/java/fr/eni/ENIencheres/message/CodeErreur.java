@@ -2,7 +2,7 @@ package fr.eni.ENIencheres.message;
 
 public abstract class CodeErreur {
 	
-	//ERREURS FORMULAIRE NOUVELLE VENTE
+	//ERREURS FORMULAIRE NOUVELLE VENTE : ServletNouvelleVente
 	/**
 	 * Format article incorrect ou vide
 	 */
@@ -27,9 +27,14 @@ public abstract class CodeErreur {
 	 * Format date de fin enchères incorrect ou vide
 	 */
 	public static final int ERREUR_FORMAT_DATE_FIN=30006;
+	/**
+	 * Adresse incomplète
+	 */
+	public static final int ERREUR_ADRESSE=30007;
 	
 	
 	//ERREURS BLL
+	//ArticleVenduManager
 	/**
 	 * Date début incohérente
 	 */

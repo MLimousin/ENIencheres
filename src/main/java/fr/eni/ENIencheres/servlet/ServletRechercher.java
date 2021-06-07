@@ -5,8 +5,11 @@ import java.util.List;
 
 import fr.eni.ENIencheres.bll.ArticleVenduManager;
 import fr.eni.ENIencheres.bll.CategorieManager;
+import fr.eni.ENIencheres.bll.UtilisateurManager;
 import fr.eni.ENIencheres.bo.ArticleVendu;
 import fr.eni.ENIencheres.bo.Categorie;
+import fr.eni.ENIencheres.bo.Utilisateur;
+import fr.eni.ENIencheres.dal.DALException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,9 +41,19 @@ public class ServletRechercher extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArticleVenduManager articleVenduMgr = new ArticleVenduManager();
-		List<ArticleVendu> listeEncheres = articleVenduMgr.selectAll();				
+		List<ArticleVendu> listeEncheres = articleVenduMgr.selectAll();		
+		
+		UtilisateurManager utilisateurMgr = new UtilisateurManager();
+		List<Utilisateur> listeUtilisateurs = null;
+		try {
+			listeUtilisateurs = utilisateurMgr.getAllUtilisateurs();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		request.setAttribute("listeEncheres", listeEncheres);
+		request.setAttribute("listeUtilisateurs", listeUtilisateurs);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
 		rd.forward(request, response);
