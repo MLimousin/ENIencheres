@@ -33,4 +33,22 @@
   	<url-pattern>/ListeEncheres</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>Inscription</servlet-name>
+  	<jsp-file>/WEB-INF/jsp/Inscription.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Inscription</servlet-name>
+  	<url-pattern>/Inscription</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Connexion</servlet-name>
+  	<jsp-file>/WEB-INF/jsp/Connexion.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Connexion</servlet-name>
+  	<url-pattern>/Connexion</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

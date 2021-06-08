@@ -41,7 +41,7 @@ public class ServletCreationUtilisateur extends HttpServlet {
                 0,
                 false
         );
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Inscription.jsp");
         try {
             um.creationUtilisateur(utilisateur);
         } catch (BLLException e) {
@@ -67,7 +67,7 @@ public class ServletCreationUtilisateur extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Inscription.jsp");
         request.setAttribute("page", "createLogin");
         rd.forward(request, response);
     }
