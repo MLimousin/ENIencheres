@@ -28,8 +28,8 @@
             <div class="nav-links" id="navLinks">
                 <i class="fa fa-times" onclick="hideMenu()"></i>
                 <ul>
-                    <li><a href="/HTML/Connexion.html">Se connecter</a></li>  <!-- !!!!! mettre lien jsp quand elle sera créée -->
-                    <li><a href="/HTML/Inscription.html">S'inscrire</a></li>  <!-- !!!!! mettre lien jsp quand elle sera créée -->
+                    <li><a href="ServletConnexionUtilisateur">Se connecter</a></li>  <!-- !!!!! mettre lien jsp quand elle sera créée -->
+                    <li><a href="createLogin">S'inscrire</a></li>  <!-- !!!!! mettre lien jsp quand elle sera créée -->
                 </ul>
             </div>
             <i class="fa fa-bars" onclick="showMenu()"></i>
@@ -51,12 +51,12 @@
 		</c:otherwise>
 	</c:choose>	
 	
-<!-- 	création de la variable "aujourdhui" pour filtrer l'affichage des articles en cours de vente -->	
+	<!-- 	création de la variable "aujourdhui" pour filtrer l'affichage des articles en cours de vente -->	
 	<jsp:useBean id="aujourdhui" class="java.util.Date" />
 	<fmt:formatDate var="dateDuJour" value="${aujourdhui}" pattern="yyyy-MM-dd" />
 	
 	
-<!-- 	création de la variable "saisie" pour filtrer l'affichage des articles en fonction de la recherche saisie -->
+	<!-- 	création de la variable "saisie" pour filtrer l'affichage des articles en fonction de la recherche saisie -->
 	<jsp:useBean id="saisie" class="java.lang.String" scope="session"/>
 	<c:choose>
 		<c:when test="${not empty filtreSaisie}">
