@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package fr.eni.ENIencheres.bo;
 
 import java.io.Serializable;
@@ -52,7 +50,4 @@ public class Categorie implements Serializable {
 	public void setLibelleCategorie(String libelleCategorie) {
 		this.libelleCategorie = libelleCategorie;
 	}
-	
-	
-	
 }
