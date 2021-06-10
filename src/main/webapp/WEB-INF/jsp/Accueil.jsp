@@ -22,6 +22,7 @@
 
 <body>
 	<header>
+		
         <nav>
             <a href=ServletRechercher><img src="img/logo ENI.jpg" alt="ENI école informatique"></a>
             <div class="nav-links" id="navLinks">
@@ -72,10 +73,7 @@
 		<div >
 		<section class="auction">
 		    <h1><label for="filtre">Filtres : </label></h1>
-		 
-		    <input type="search" name="filtre" id="filtre" size="40" placeholder="Le nom de l'article contient...">
-		    <input class="search-btn" type="submit" value="Rechercher">
-		    
+		
 		    <section class="choice">
 			    <label for="categorieChoisie">Catégories : </label>
 			    <select name="categorieChoisie" id="categorieChoisie">
@@ -87,7 +85,10 @@
 						</c:if>
 					</c:forEach>
 				</select>
-			</section>
+				<br>
+				<input class="search-text" type="search" name="filtre" id="filtre" placeholder="Le nom de l'article contient...">
+		    	<input class="search-btn" type="submit" value="Rechercher">
+			</section>	
 		</section>
 		
 		<section class="liveAuction">
@@ -103,36 +104,48 @@
 									<c:choose>
 										<c:when test="${categorie=='Toutes'}">
 										<div class="liveAuction-col">
-										
-											<img src="${articleVendu.photo}"/>
-											
-											<p>${articleVendu.nomArticle}</p>
-											<p>Prix : ${articleVendu.miseAPrix} points</p>
-											<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-											<p> Vendeur : 
-												<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-													<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-														${utilisateur.pseudo}
-													</c:if>
-												</c:forEach>	
-											</p>	
+										<table>
+											<tr>
+												<td>
+													<img src="${articleVendu.photo}"/>
+												</td>
+												<td>
+													<h5>${articleVendu.nomArticle}</h5>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p> Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>	
+													</p>
+												</td>
+											</tr>
+										</table>
 										</div>									
 										</c:when >
 										<c:when test="${articleVendu.noCategorie==numeroCategorie}">
 										<div class="liveAuction-col">
-										
-											<img src="${articleVendu.photo}"/>
-											
-											<p>${articleVendu.nomArticle}</p>
-											<p>Prix : ${articleVendu.miseAPrix} points</p>
-											<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-											<p>Vendeur : 
-												<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-													<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-														${utilisateur.pseudo}
-													</c:if>
-												</c:forEach>
-											</p>	
+										<table>
+											<tr>
+												<td>
+													<img src="${articleVendu.photo}"/>
+												</td>
+												<td>
+													<h5>${articleVendu.nomArticle}</h5>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p>Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>
+													</p>
+												</td>
+											</tr>
+										</table>	
 										</div>							
 										</c:when>	
 									</c:choose>
@@ -142,36 +155,48 @@
 										<c:choose>
 											<c:when test="${categorie=='Toutes'}">
 											<div class="liveAuction-col">
-											
-												<img src="${articleVendu.photo}"/>
-											
-												<p>${articleVendu.nomArticle}</p>
-												<p>Prix : ${articleVendu.miseAPrix} points</p>
-												<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-												<p> Vendeur : 
-													<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-														<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-															${utilisateur.pseudo}
-														</c:if>
-													</c:forEach>
-												</p>	
+												<table>
+													<tr>
+														<td>
+															<img src="${articleVendu.photo}"/>
+														</td>
+														<td>													
+															<h5>${articleVendu.nomArticle}</h5>
+															<p>Prix : ${articleVendu.miseAPrix} points</p>
+															<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+															<p> Vendeur : 
+																<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																	<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																		${utilisateur.pseudo}
+																	</c:if>
+																</c:forEach>
+															</p>
+														</td>
+													</tr>
+												</table>	
 											</div>
 											</c:when >
 											<c:when test="${articleVendu.noCategorie==numeroCategorie}">
 											<div class="liveAuction-col">
-												
-												<img src="${articleVendu.photo}"/>
-											
-												<p>${articleVendu.nomArticle}</p>
-												<p>Prix : ${articleVendu.miseAPrix} points</p>
-												<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-												<p> Vendeur : 
-													<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-														<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-															${utilisateur.pseudo}
-														</c:if>
-													</c:forEach>
-												</p>
+												<table>
+													<tr>
+														<td>
+															<img src="${articleVendu.photo}"/>
+														</td>
+														<td>
+															<h5>${articleVendu.nomArticle}</h5>
+															<p>Prix : ${articleVendu.miseAPrix} points</p>
+															<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+															<p> Vendeur : 
+																<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																	<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																		${utilisateur.pseudo}
+																	</c:if>
+																</c:forEach>
+															</p>
+														</td>
+													</tr>
+												</table>
 											</div>								
 											</c:when>	
 										</c:choose>
