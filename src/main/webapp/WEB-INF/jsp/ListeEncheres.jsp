@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  
 <%@page import="fr.eni.ENIencheres.bo.ArticleVendu" %>
+<%@page import="fr.eni.ENIencheres.bo.Utilisateur" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Date" %>
 
@@ -17,49 +18,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AccueilConnect</title>
+    <link type ="text/css" rel="stylesheet" href="css/AccEniEnch.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 
 <body>
     
     <!-- En-tête -->
     <header>
-
-        <!-- Titre -->
-        <h1>ENI Enchères</h1>
-    
-        <!-- Sous-titre -->
-        <h2>Liste des enchères</h2>
-
-        <!-- Lien déconnexion -->
-        <a href="ServletRechercher">
-            Déconnexion
-        </a>
-
-        <!-- Lien mon profil -->
-        <a href="http://google.com">
-            Mon profil
-        </a>
-
-        <!-- Lien vendre un article -->
-        <a href="ServletNouvelleVente">
-            Vendre un article
-        </a>
-    
-        <!-- Lien enchères -->
-        <a href="http://google.com">
-            Enchères
-        </a>
-        
+    	<nav>
+            <a href=ServletRechercher><img src="img/logo ENI.jpg" alt="ENI école informatique"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="ServletRechercher">Déconnexion</a></li>  <!-- !!!!! mettre lien jsp quand elle sera créée -->
+                    <li><a href="http://google.com">Mon profil</a></li>  <!-- !!!!! mettre lien jsp quand elle sera créée -->
+                    <li><a href="ServletNouvelleVente">Vendre un article</a></li> 
+                    <li><a href="http://google.com">Enchères</a></li>  <!-- !!!!! mettre lien jsp quand elle sera créée -->
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>ENI enchères</h1>
+            <p>Liste des enchères</p>
+        </div>        
     </header>
    	
    	<!-- 	création de la variable "utilisateur" pour filtrer l'affichage des articles en fonction de la personne connectée -->
-    <jsp:useBean id="utilisateur" class="java.lang.String" scope="session"/>
+    <jsp:useBean id="pseudo" class="java.lang.String" scope="session"/>
+    <jsp:useBean id="utilisateurConnecte" class="fr.eni.ENIencheres.bo.Utilisateur" scope="session"/>
 	<c:choose>
-		<c:when test="${not empty utilisateurConnecte}">
-			<c:set var="utilisateur" value="${utilisateurConnecte}" scope="session" />
+		<c:when test="${not empty identifiant}">
+			<c:set var="pseduo" value="${identifiant}" scope="session" />
+			<c:forEach var="u" items="listeUtilisateurs">
+				<c:if test="${u.pseudo == pseudo}">
+					<c:set var="utilisateurConnecte" value="${u}" scope="session" />
+				</c:if>
+			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<c:set var="utilisateur" value="" scope="session" />
+			<c:set var="pseudo" value="" scope="session" />
 		</c:otherwise>
 	</c:choose>	
     <!-- 	création de la variable "categorie" pour filtrer l'affichage des articles en fonction de la sélection -->
@@ -107,7 +107,10 @@
 			<c:set var="ckAchats" value="${achats}" scope="session" />
 		</c:when>
 		<c:otherwise>
-			<c:set var="ckAchats" value="EncheresOuvertes" scope="session" />
+			<c:choose>
+				<c:when test="${empty ventes}"><c:set var="ckAchats" value="EncheresOuvertes" scope="session" /></c:when>
+				<c:otherwise><c:set var="ckAchats" value="" scope="session" /></c:otherwise>
+			</c:choose>
 		</c:otherwise>
 	</c:choose>	
 	
@@ -125,6 +128,9 @@
 <!-- 	début du formulaire -->	
 	
 	<form action="ServletRechercherModeConnecte" method="post">
+		<input type="hidden" name="pseudo" value="${utilisateurConnecte.pseudo}">
+		<input type="hidden" name="numeroUtilisateur" value="${utilisateurConnecte.noUtilisateur}">
+	
 		<div >
 		<section class="auction">
 		    <h1><label for="filtre">Filtres : </label></h1>
@@ -145,49 +151,45 @@
 				</select>
 			</section>
 			
-			<input type="hidden" name="pseudo" value="${utilisateur}">
 			<table>
 				<!-- Choix unique "radio button" -->
 				<tr>
 		            <td>
 		            	<label for="Achats">Achats</label>
-		            	<input type="radio" name="achatsEtVentes" id="Achats" onchange="masquerSelectionVentes(this)" ${radio=='Achats'?"checked":""} />
+		            	<input type="radio" name="achatsEtVentes" id="Achats" onchange="masquerSelectionVentes(this)" Value="Achats" ${radio=='Achats'?"checked":""} />
 		            </td>
 		            <td>
 		            	<label for="Ventes">Ventes</label>
-	            		<input type="radio" name="achatsEtVentes" id="Ventes" onchange="masquerSelectionAchats(this)" ${radio=='Ventes'?"checked":""}/>
+	            		<input type="radio" name="achatsEtVentes" id="Ventes" onchange="masquerSelectionAchats(this)" Value="Ventes" ${radio=='Ventes'?"checked":""}/>
 	            	</td>
         		</tr>
         		<!-- Choix unique "checkbox" -->
-        		<tr>
-        		<div id="AchatOuVente"></div>
-        		        		<c:out value="${radio}"/>
-        		
+        		<tr>      		
 		            <td>
 		            	<div>
-				            <input type="checkbox" name="achats" id="EncheresOuvertes" ${ckAchats=='EncheresOuvertes'?"checked":""} ${radio=='Ventes'?"disabled":""}/>
+				            <input type="checkbox" name="achats" id="EncheresOuvertes" Value="EncheresOuvertes" ${ckAchats=='EncheresOuvertes'?"checked":""} ${radio=='Ventes'?"disabled":""}/>
 				            <label for="EncheresOuvertes">Enchères ouvertes</label>
 				        </div>
 				        <div>
-				        	<input type="checkbox" name="achats" id="MesEncheresEnCours" ${ckAchats=='MesEncheresEnCours'?"checked":""} ${radio=='Ventes'?"disabled":""}/>
+				        	<input type="checkbox" name="achats" id="MesEncheresEnCours" Value="MesEncheresEnCours" ${ckAchats=='MesEncheresEnCours'?"checked":""} ${radio=='Ventes'?"disabled":""}/>
 				            <label for="MesEncheresEnCours">Mes enchères en cours</label>
 				        </div>
 				        <div>
-				            <input type="checkbox" name="achats" id="MesEncheresRemportees" ${ckAchats=='MesEncheresRemportees'?"checked":""} ${radio=='Ventes'?"disabled":""}/>
+				            <input type="checkbox" name="achats" id="MesEncheresRemportees" Value="MesEncheresRemportees" ${ckAchats=='MesEncheresRemportees'?"checked":""} ${radio=='Ventes'?"disabled":""}/>
 				            <label for="MesEncheresRemportees">Mes enchères remportées</label>
 				        </div>
 		            </td>
 		            <td>
 						<div>
-				            <input type="checkbox" name="ventes" id="MesVentesEnCours" ${ckVentes=='MesVentesEnCours'?"checked":""} ${radio=='Achats'?"disabled":""}/>
+				            <input type="checkbox" name="ventes" id="MesVentesEnCours" Value="MesVentesEnCours" ${ckVentes=='MesVentesEnCours'?"checked":""} ${radio=='Achats'?"disabled":""}/>
 				            <label for="MesVentesEnCours">Mes ventes en cours</label>
 				        </div>
 				        <div>
-				            <input type="checkbox" name="ventes" id="VentesNonDebutees" ${ckVentes=='VentesNonDebutees'?"checked":""} ${radio=='Achats'?"disabled":""}/>
+				            <input type="checkbox" name="ventes" id="VentesNonDebutees" Value="VentesNonDebutees" ${ckVentes=='VentesNonDebutees'?"checked":""} ${radio=='Achats'?"disabled":""}/>
 				            <label for="VentesNonDebutees">Ventes non débutées</label>
 				        </div>
 				        <div>
-				            <input type="checkbox" name="ventes" id="VentesTerminees" ${ckVentes=='VentesTerminees'?"checked":""} ${radio=='Achats'?"disabled":""}/>
+				            <input type="checkbox" name="ventes" id="VentesTerminees" Value="VentesTerminees" ${ckVentes=='VentesTerminees'?"checked":""} ${radio=='Achats'?"disabled":""}/>
 				            <label for="VentesTerminees">Ventes terminées</label>
 				        </div>
 				   	</td>
@@ -199,95 +201,373 @@
 		</section>
 		
 		<section class="liveAuction">
-			<h1>Enchères en cours</h1>	
+			<h1>
+				${ckAchats=='EncheresOuvertes'?"Enchères ouvertes :":""} 
+				${ckAchats=='MesEncheresEnCours'?"Mes enchères en cours :":""}
+				${ckAchats=='MesEncheresRemportees'?"Mes enchères remportées :":""} 
+				${ckVentes=='MesVentesEnCours'?"Mes ventes en cours :":""} 
+				${ckVentes=='VentesNonDebutees'?"Ventes non débutées :":""}  
+				${ckVentes=='VentesTerminees'?"Ventes terminées :":""} 
+			</h1>	
 		
 			<c:choose>
 				<c:when test="${not empty listeEncheres && listeEncheres.size()>0}">
 				<div class="row">	
 					<c:forEach var="articleVendu" items="${listeEncheres}">
-						<c:if test="${articleVendu.dateDebutEncheres<dateDuJour && articleVendu.dateFinEncheres>dateDuJour}">
-							<c:choose>
-								<c:when test="${saisie==''}">
+						<c:choose>
+							
+							<c:when test="${ckAchats=='EncheresOuvertes'}">
+								<c:if test="${articleVendu.dateDebutEncheres<=dateDuJour && articleVendu.dateFinEncheres>dateDuJour}">
 									<c:choose>
-										<c:when test="${categorie=='Toutes'}">
-										<div class="liveAuction-col">
-										
-											<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
-											
-											<p>${articleVendu.nomArticle}</p>
-											<p>Prix : ${articleVendu.miseAPrix} points</p>
-											<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-											<p> Vendeur : 
-												<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-													<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-														${utilisateur.pseudo}
-													</c:if>
-												</c:forEach>	
-											</p>	
-										</div>									
-										</c:when >
-										<c:when test="${articleVendu.noCategorie==numeroCategorie}">
-										<div class="liveAuction-col">
-										
-											<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
-											
-											<p>${articleVendu.nomArticle}</p>
-											<p>Prix : ${articleVendu.miseAPrix} points</p>
-											<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-											<p>Vendeur : 
-												<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-													<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-														${utilisateur.pseudo}
-													</c:if>
-												</c:forEach>
-											</p>	
-										</div>							
-										</c:when>	
-									</c:choose>
-								</c:when>	
-								<c:when test="${saisie!=''}">
-									<c:if test="${fn:containsIgnoreCase(articleVendu.nomArticle, saisie)}">
-										<c:choose>
-											<c:when test="${categorie=='Toutes'}">
-											<div class="liveAuction-col">
-											
-												<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
-											
-												<p>${articleVendu.nomArticle}</p>
-												<p>Prix : ${articleVendu.miseAPrix} points</p>
-												<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-												<p> Vendeur : 
-													<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-														<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-															${utilisateur.pseudo}
-														</c:if>
-													</c:forEach>
-												</p>	
-											</div>
-											</c:when >
-											<c:when test="${articleVendu.noCategorie==numeroCategorie}">
-											<div class="liveAuction-col">
+										<c:when test="${saisie==''}">
+											<c:choose>
+												<c:when test="${categorie=='Toutes'}">
+												<div class="liveAuction-col">
 												
-												<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
-											
-												<p>${articleVendu.nomArticle}</p>
-												<p>Prix : ${articleVendu.miseAPrix} points</p>
-												<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
-												<p> Vendeur : 
-													<c:forEach var="utilisateur" items="${listeUtilisateurs}">
-														<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
-															${utilisateur.pseudo}
-														</c:if>
-													</c:forEach>
-												</p>
-											</div>								
-											</c:when>	
-										</c:choose>
-									</c:if>
-								</c:when>
-							</c:choose>
-						</c:if>	
-								
+													<img src="${articleVendu.photo}"/>
+
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p> Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>	
+													</p>	
+												</div>									
+												</c:when >
+												<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+												<div class="liveAuction-col">
+												
+													<img src="${articleVendu.photo}"/>
+													
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p>Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>
+													</p>	
+												</div>							
+												</c:when>	
+											</c:choose>
+										</c:when>	
+										<c:when test="${saisie!=''}">
+											<c:if test="${fn:containsIgnoreCase(articleVendu.nomArticle, saisie)}">
+												<c:choose>
+													<c:when test="${categorie=='Toutes'}">
+													<div class="liveAuction-col">
+													
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>	
+													</div>
+													</c:when >
+													<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+													<div class="liveAuction-col">
+														
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>
+													</div>								
+													</c:when>	
+												</c:choose>
+											</c:if>
+										</c:when>
+									</c:choose>
+								</c:if>	
+							</c:when>
+
+
+							<c:when test="${ckAchats=='MesEncheresEnCours'}">
+							</c:when>
+
+
+							<c:when test="${ckAchats=='MesEncheresRemportees'}">
+							</c:when>
+
+
+							<c:when test="${ckVentes=='MesVentesEnCours'}">
+								<c:if test="${articleVendu.dateDebutEncheres<dateDuJour && articleVendu.dateFinEncheres>dateDuJour && articleVendu.noUtilisateur==utilisateurConnecte.noUtilisateur}">
+									<c:choose>
+										<c:when test="${saisie==''}">
+											<c:choose>
+												<c:when test="${categorie=='Toutes'}">
+												<div class="liveAuction-col">
+												
+													<img src="${articleVendu.photo}"/>
+													
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p> Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>	
+													</p>	
+												</div>									
+												</c:when >
+												<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+												<div class="liveAuction-col">
+												
+													<img src="${articleVendu.photo}"/>
+													
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p>Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>
+													</p>	
+												</div>							
+												</c:when>	
+											</c:choose>
+										</c:when>	
+										<c:when test="${saisie!=''}">
+											<c:if test="${fn:containsIgnoreCase(articleVendu.nomArticle, saisie)}">
+												<c:choose>
+													<c:when test="${categorie=='Toutes'}">
+													<div class="liveAuction-col">
+													
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>	
+													</div>
+													</c:when >
+													<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+													<div class="liveAuction-col">
+														
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>
+													</div>								
+													</c:when>	
+												</c:choose>
+											</c:if>
+										</c:when>
+									</c:choose>
+								</c:if>
+							</c:when>
+
+
+							<c:when test="${ckVentes=='VentesNonDebutees'}">
+								<c:if test="${articleVendu.dateDebutEncheres>dateDuJour}">
+									<c:choose>
+										<c:when test="${saisie==''}">
+											<c:choose>
+												<c:when test="${categorie=='Toutes'}">
+												<div class="liveAuction-col">
+												
+													<img src="${articleVendu.photo}"/>
+													
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p> Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>	
+													</p>	
+												</div>									
+												</c:when >
+												<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+												<div class="liveAuction-col">
+												
+													<img src="${articleVendu.photo}"/>
+													
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p>Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>
+													</p>	
+												</div>							
+												</c:when>	
+											</c:choose>
+										</c:when>	
+										<c:when test="${saisie!=''}">
+											<c:if test="${fn:containsIgnoreCase(articleVendu.nomArticle, saisie)}">
+												<c:choose>
+													<c:when test="${categorie=='Toutes'}">
+													<div class="liveAuction-col">
+													
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>	
+													</div>
+													</c:when >
+													<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+													<div class="liveAuction-col">
+														
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>
+													</div>								
+													</c:when>	
+												</c:choose>
+											</c:if>
+										</c:when>
+									</c:choose>
+								</c:if>	
+							</c:when>
+							
+
+							<c:when test="${ckVentes=='VentesTerminees'}">
+								<c:if test="${articleVendu.dateFinEncheres<dateDuJour}">
+									<c:choose>
+										<c:when test="${saisie==''}">
+											<c:choose>
+												<c:when test="${categorie=='Toutes'}">
+												<div class="liveAuction-col">
+												
+													<img src="${articleVendu.photo}"/>
+													
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p> Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>	
+													</p>	
+												</div>									
+												</c:when >
+												<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+												<div class="liveAuction-col">
+												
+													<img src="${articleVendu.photo}"/>
+													
+													<p>${articleVendu.nomArticle}</p>
+													<p>Prix : ${articleVendu.miseAPrix} points</p>
+													<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+													<p>Vendeur : 
+														<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+															<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																${utilisateur.pseudo}
+															</c:if>
+														</c:forEach>
+													</p>	
+												</div>							
+												</c:when>	
+											</c:choose>
+										</c:when>	
+										<c:when test="${saisie!=''}">
+											<c:if test="${fn:containsIgnoreCase(articleVendu.nomArticle, saisie)}">
+												<c:choose>
+													<c:when test="${categorie=='Toutes'}">
+													<div class="liveAuction-col">
+													
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>	
+													</div>
+													</c:when >
+													<c:when test="${articleVendu.noCategorie==numeroCategorie}">
+													<div class="liveAuction-col">
+														
+														<img src="${articleVendu.photo}"/>
+													
+														<p>${articleVendu.nomArticle}</p>
+														<p>Prix : ${articleVendu.miseAPrix} points</p>
+														<p>Fin de l'enchere : ${articleVendu.dateFinEncheres}</p>
+														<p> Vendeur : 
+															<c:forEach var="utilisateur" items="${listeUtilisateurs}">
+																<c:if test="${articleVendu.noUtilisateur == utilisateur.noUtilisateur}">
+																	${utilisateur.pseudo}
+																</c:if>
+															</c:forEach>
+														</p>
+													</div>								
+													</c:when>	
+												</c:choose>
+											</c:if>
+										</c:when>
+									</c:choose>
+								</c:if>	
+							</c:when>
+							
+						</c:choose>		
 					</c:forEach>
 				</div>
 				</c:when>
@@ -365,7 +645,18 @@
 			 }	 
 		}
 		
-	</script>     
+	</script>    
+	 
+	<!-- JAVASCRIPT pour menu/x version smartphone -->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() {
+            navLinks.style.right = "0";
+        }
+        function hideMenu() {
+            navLinks.style.right = "-200px";
+        }
+    </script>
 
 
 </body>

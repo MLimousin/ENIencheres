@@ -51,10 +51,18 @@ public class ServletRechercherModeConnecte extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String identifiant = (String) request.getSession().getAttribute("identifiant");
+		Utilisateur utilisateurConnecte = new Utilisateur();
+		for (Utilisateur u : listeUtilisateurs) {
+			if (u.getPseudo().equals(identifiant)) {
+				utilisateurConnecte = u;
+			}
+		}
 		
 		request.setAttribute("listeEncheres", listeEncheres);
 		request.setAttribute("listeUtilisateurs", listeUtilisateurs);
-		
+		request.setAttribute("utilisateurConnecte", utilisateurConnecte);
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ListeEncheres.jsp");
 		rd.forward(request, response);
 		

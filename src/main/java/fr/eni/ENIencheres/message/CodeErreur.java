@@ -31,7 +31,10 @@ public abstract class CodeErreur {
 	 * Adresse incomplète
 	 */
 	public static final int ERREUR_ADRESSE=30007;
-	
+	/**
+	 * Photo manquante
+	 */
+	public static final int ERREUR_PHOTO=30008;
 	
 	//ERREURS BLL
 	//ArticleVenduManager

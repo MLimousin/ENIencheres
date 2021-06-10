@@ -5,7 +5,7 @@
 }
 
 header {
-    min-height: 50vh;
+    height: 30%;
     width: 100%;
     background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)),url(../img/maillet.jpg);
     background-position: center;
@@ -21,7 +21,7 @@ nav {
 }
 
 nav img {
-    width: 150px;
+    width: 80px;
 }
 
 .nav-links {
@@ -59,8 +59,8 @@ nav img {
 .text-box {
     width: 50%;
     color: #fff;
-    position: relative;
-    top: -10%;
+    position: absolute;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -71,7 +71,7 @@ nav img {
 }
 
 .text-box p {
-    margin: 10px 0px 40px;
+    margin: 10% 0% 10%;
     font-size: 30px;
     color: #fff;
 }
@@ -83,6 +83,9 @@ nav .fa {
     .text-box h1 {
         font-size: 20px;
     }
+    nav img {
+    	width: 40px;
+	}
     .nav-links ul li {
         display: block;
     }
@@ -114,7 +117,7 @@ nav .fa {
     width: 80%;
     margin: auto;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 10px;
 }
 
 .auction input {
@@ -142,13 +145,13 @@ nav .fa {
 .auction .search-btn:hover {
     border: 1px solid black;
     background: goldenrod;
-    color: black;
+    color: white;
     transition: 0.5s;
     box-shadow: 3px 3px 5px black;
 }
 
 .liveAuction {
-    top: 100px;
+    top: 10px;
     flex-basis: auto;
     position: relative;
     width: auto;

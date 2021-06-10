@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil ENI Enchères</title>
+    <link rel="stylesheet" href="/CSS/AccEniEnch.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/HTML/AccEniEnch.html"><img src="/IMG/logo ENI.jpg" alt="ENI école informatique"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="/HTML/Connexion.html">Se connecter</a></li>
+                    <li><a href="/HTML/Inscription.html">S'inscrire</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>ENI enchères</h1>
+            <p>Liste des enchères</p>
+        </div>
+    </header>
+
+    <section class="auction">
+        <h1>Filtre :</h1>
+
+        <label for="site-search"></label>
+        <input type="search" id="site-search" name="q"
+            placeholder="Saisir votre recherche...">
+        <a href="" class="search-btn">Rechercher</a>
+
+        <section class="choice">
+            <label for="Catégories">Catégories :</label>
+            <select name="Catégories">
+            <option value="">--Choisir une catégorie--</option>
+            <option value="Toutes">Toutes</option>
+            <option value="Ameublement">Ameublement</option>
+            <option value="Informatique">Informatique</option>
+            <option value="Sports & Loisirs">Sports & Loisirs</option>
+            <option value="Vêtements">Vêtements</option>
+            </select>
+        </section>
+
+    </section>
+
+    <section class="liveAuction">
+        <h1>Enchères en cours</h1>
+
+        <div class="row">
+            <div class="liveAuction-col">
+                <img src="/IMG/controller NES.jpg">
+                <p>Manette Nintendo NES</p>
+                <p>Prix</p>
+                <p>199 points</p>
+                <p>Fin de l'enchère</p>
+                <p>08/06/2021</p>
+                <p>Vendeur</p>
+                <p>Jojo44</p>
+            </div>
+
+            
+                <div class="liveAuction-col">
+                    <img src="/IMG/chambreAdulte.jpg">
+                    <p>Chambre adulte</p>
+                    <p>Prix</p>
+                    <p>859 points</p>
+                    <p>Fin de l'enchère</p>
+                    <p>08/06/2021</p>
+                    <p>Vendeur</p>
+                    <p>Gigi56</p>
+                </div>
+        </div>
+
+
+    </section>
+
+
+<!-- JAVASCRIPT pour menu/x version smartphone -->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() {
+            navLinks.style.right = "0";
+        }
+        function hideMenu() {
+            navLinks.style.right = "-200px";
+        }
+    </script>
+</body>
+</html>

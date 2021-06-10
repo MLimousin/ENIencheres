@@ -30,8 +30,8 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//si connexion OK 
-		request.getSession().setAttribute("utilisateur",request.getParameter("identifiant"));
-		RequestDispatcher rDisp = request.getRequestDispatcher("/WEB-INF/jsp/ListeEncheres.jsp");
+		request.getSession().setAttribute("identifiant",request.getParameter("identifiant"));
+		RequestDispatcher rDisp = request.getRequestDispatcher("/ServletRechercherModeConnecte.java");
 		rDisp.forward(request, response);
 		
 	}
