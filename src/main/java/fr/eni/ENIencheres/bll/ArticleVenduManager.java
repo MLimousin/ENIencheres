@@ -33,7 +33,7 @@ public class ArticleVenduManager {
 		return listeEncheres;
 	}
 	
-	public ArticleVendu insert(String nomArticle, String description, Date dateDebutEncheres,Date dateFinEncheres, int miseAPrix, int noUtilisateur, int noCategorie) throws BusinessException {
+	public ArticleVendu insert(String nomArticle, String description, Date dateDebutEncheres,Date dateFinEncheres, int miseAPrix, int noUtilisateur, int noCategorie, String photo) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		this.validerDateDebut(dateDebutEncheres, businessException);
 		this.validerDateFin(dateFinEncheres, businessException);
@@ -48,6 +48,7 @@ public class ArticleVenduManager {
 			articleVendu.setMiseAPrix(miseAPrix);
 			articleVendu.setNoUtilisateur(noUtilisateur);
 			articleVendu.setNoCategorie(noCategorie);
+			articleVendu.setPhoto(photo);
 			
 			this.articleVenduDAO.insert(articleVendu);
 		}else {

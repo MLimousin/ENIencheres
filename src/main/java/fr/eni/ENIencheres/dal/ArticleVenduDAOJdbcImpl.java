@@ -21,8 +21,8 @@ import fr.eni.ENIencheres.bo.ArticleVendu;
  */
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 
-	private static final String INSERT="INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) "
-			+ "									VALUES(?, ?, ?, ?, ?, ?, ?);";
+	private static final String INSERT="INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie,photo) "
+			+ "									VALUES(?, ?, ?, ?, ?, ?, ?,?);";
 	private static final String SELECTALL="SELECT * FROM ARTICLES_VENDUS;";
 	private static final String SELECTBYNAME="SELECT * FROM ARTICLES_VENDUS WHERE nomArticle=?;";
 	private static final String DELETE="DELETE FROM ARTICLES_VENDUS WHERE noArticle=?;";
@@ -43,19 +43,22 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			String description = articleVendu.getDescription();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String dateDebutEncheres = sdf.format(articleVendu.getDateDebutEncheres());
+//			Date dateDebutEncheres = articleVendu.getDateDebutEncheres();
 			Date dateFinEncheres = articleVendu.getDateFinEncheres();
 			int miseAPrix = articleVendu.getMiseAPrix();
 			int noUtilisateur = articleVendu.getNoUtilisateur();
 			int noCategorie = articleVendu.getNoCategorie();
+			String photo = articleVendu.getPhoto();
 			
 			pstmt.setString(1, nomArticle);
 			pstmt.setString(2, description);
 			pstmt.setString(3,  dateDebutEncheres);
+//			pstmt.setDate(3, new java.sql.Date(dateDebutEncheres.getTime()));
 			pstmt.setDate(4, new java.sql.Date(dateFinEncheres.getTime()));
-			
 			pstmt.setInt(5, miseAPrix);
 			pstmt.setInt(6, noUtilisateur);
 			pstmt.setInt(7, noCategorie);
+			pstmt.setString(8, photo);
 			
 			pstmt.executeUpdate();
 			
@@ -84,7 +87,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			
 			ArticleVendu articleVendu = null;
 			while(rs.next()){
-				articleVendu = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"), rs.getDate("date_fin_encheres"), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				articleVendu = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"), rs.getDate("date_fin_encheres"), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"),rs.getString("photo"));
 				listeEncheres.add(articleVendu);
 			}
 			

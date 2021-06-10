@@ -15,10 +15,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil ENI Enchères</title>
-    <link type ="text/css" rel="stylesheet" href="css/AccEniEnch.css">
+    <link type ="text/css" rel="stylesheet" href="css/accueil.css">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -98,14 +97,14 @@
 				<c:when test="${not empty listeEncheres && listeEncheres.size()>0}">
 				<div class="row">	
 					<c:forEach var="articleVendu" items="${listeEncheres}">
-						<c:if test="${articleVendu.dateDebutEncheres<dateDuJour && articleVendu.dateFinEncheres>dateDuJour}">
+						<c:if test="${articleVendu.dateDebutEncheres<=dateDuJour && articleVendu.dateFinEncheres>dateDuJour}">
 							<c:choose>
 								<c:when test="${saisie==''}">
 									<c:choose>
 										<c:when test="${categorie=='Toutes'}">
 										<div class="liveAuction-col">
 										
-											<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
+											<img src="${articleVendu.photo}"/>
 											
 											<p>${articleVendu.nomArticle}</p>
 											<p>Prix : ${articleVendu.miseAPrix} points</p>
@@ -122,7 +121,7 @@
 										<c:when test="${articleVendu.noCategorie==numeroCategorie}">
 										<div class="liveAuction-col">
 										
-											<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
+											<img src="${articleVendu.photo}"/>
 											
 											<p>${articleVendu.nomArticle}</p>
 											<p>Prix : ${articleVendu.miseAPrix} points</p>
@@ -144,7 +143,7 @@
 											<c:when test="${categorie=='Toutes'}">
 											<div class="liveAuction-col">
 											
-												<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
+												<img src="${articleVendu.photo}"/>
 											
 												<p>${articleVendu.nomArticle}</p>
 												<p>Prix : ${articleVendu.miseAPrix} points</p>
@@ -161,7 +160,7 @@
 											<c:when test="${articleVendu.noCategorie==numeroCategorie}">
 											<div class="liveAuction-col">
 												
-												<!-- !!!!! Voir pour insérer une image à partir de la bdd -->
+												<img src="${articleVendu.photo}"/>
 											
 												<p>${articleVendu.nomArticle}</p>
 												<p>Prix : ${articleVendu.miseAPrix} points</p>

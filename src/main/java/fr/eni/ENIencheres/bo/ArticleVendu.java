@@ -17,6 +17,7 @@ public class ArticleVendu implements Serializable {
 	private String etatVente;
 	private int noUtilisateur;
 	private int noCategorie;
+	private String photo;
 	
 	/** Constructeur sans parametre
 	 * 
@@ -34,7 +35,7 @@ public class ArticleVendu implements Serializable {
 	 * @param prixVente
 	 */
 	public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, int miseAPrix, int noUtilisateur, int noCategorie) {
+			Date dateFinEncheres, int miseAPrix, int noUtilisateur, int noCategorie, String photo) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -43,6 +44,7 @@ public class ArticleVendu implements Serializable {
 		this.miseAPrix = miseAPrix;
 		this.noUtilisateur = noUtilisateur;
 		this.noCategorie = noCategorie;
+		this.photo=photo;
 	}
 	
 	/**Constructeur avec parametres AVEC noArticle et prix de vente
@@ -57,7 +59,7 @@ public class ArticleVendu implements Serializable {
 	 * @param noCategorie
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, int miseAPrix, int prixVente, int noUtilisateur, int noCategorie) {
+			Date dateFinEncheres, int miseAPrix, int prixVente, int noUtilisateur, int noCategorie, String photo) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -68,6 +70,7 @@ public class ArticleVendu implements Serializable {
 		this.prixVente = prixVente;
 		this.noUtilisateur = noUtilisateur;
 		this.noCategorie = noCategorie;
+		this.photo=photo;
 		
 	}
 
@@ -162,6 +165,14 @@ public class ArticleVendu implements Serializable {
 
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	

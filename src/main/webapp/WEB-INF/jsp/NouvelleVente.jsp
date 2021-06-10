@@ -7,7 +7,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <title>Nouvelle vente</title>
@@ -33,7 +33,7 @@
 
 
 <!-- 	début du formulaire -->
-<form action="ServletNouvelleVente" method="post">
+<form action="ServletNouvelleVente" method="post" enctype="multipart/form-data">
 	<label for="article">Article : </label>
 	<input type="text" name="article" id="article" required value=${param.article} >
 	<br>
@@ -48,7 +48,7 @@
 	</select>
 	<br>
 	<label for="photo">Photo de l'article : </label>
-	<input type="file" id="photo" name="photo" accept="image/*">
+	<input type="file" id="photo" name="photo" accept="image/*" required value=${nomPhoto}>
 	<br>
 	<label for="prix">Mise à prix : </label>
 	<input type="number" name="prix" step="10" required value=${param.prix}>
