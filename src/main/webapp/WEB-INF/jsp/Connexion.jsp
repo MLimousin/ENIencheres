@@ -7,34 +7,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <link rel="stylesheet" href="css/connexion.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     
-    <!-- En-tête -->
     <header>
-
-        <!-- Titre -->
-        <h1>ENI Enchères</h1>
-
-        <!-- Sous-titre -->
-        <h2>Se connecter</h1>
-
+        <nav>
+            <a href="ServletRechercher"><img src="img/logo ENI.jpg" alt="ENI école informatique"></a>
+        </nav>
+        <div class="text-box">
+            <h1>ENI enchères</h1>
+            <p>Page de connexion</p>
+        </div>
     </header>
 
+	<div class="loginbox">
+        <img class="avatar" src="img/connexion.png">
+        <h1>Login</h1>
     <!-- Création formulaire -->
-    <form>
-
         <!-- Boxes de connexion -->
-        <form>
+        <form action="ServletRechercherModeConnecte" method="get">
             <div>
-                <label for="identifiant">Identifiant :</label>
-                <input id="identifiant" type="text" name="identifiant">
+                <label for="identifiant"><p>Identifiant :</p></label>
+                <input id="identifiant" type="text" name="identifiant" placeholder="Pseudo">
             </div>
             <div>
-                <label for="password">Mot de passe :</label>
-                <input id="password" type="text" name="password">
+                <label for="password"><p>Mot de passe : </p></label>
+                <input id="password" type="text" name="password" placeholder="Mot de passe">
             </div>
-        </form>
 
         <!-- Case à cocher pour mémoriser les identifiants -->
         <div>
@@ -54,6 +56,7 @@
         <!-- Renvoi vers la page d'inscription -->
         <div>
             <a href="createLogin"><button type="button">Créer un compte</button></a>
+            <a href="ServletRechercher"><button type="button">Annuler</button></a>
         </div>
     </form>
 

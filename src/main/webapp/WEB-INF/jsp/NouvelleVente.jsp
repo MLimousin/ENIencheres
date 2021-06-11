@@ -8,11 +8,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<title>Nouvelle vente</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccueilConnect</title>
+    <link type ="text/css" rel="stylesheet" href="css/nouvelleVente.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
+
 <body>
+	<header>
+    	<nav>
+            <a href=ServletRechercher><img src="img/logo ENI.jpg" alt="ENI école informatique"></a>
+        </nav>
+        <div class="text-box">
+            <h1>ENI enchères</h1>
+            <p>Nouvelle vente</p>
+        </div>        
+    </header>
 <!-- 	création de la variable "categorie" pour filtrer l'affichage des articles en fonction de la sélection -->
 	<jsp:useBean id="cat" class="java.lang.String" scope="session"/>
 	<c:choose>
@@ -34,46 +50,64 @@
 
 <!-- 	début du formulaire -->
 <form action="ServletNouvelleVente" method="post" enctype="multipart/form-data">
-	<label for="article">Article : </label>
-	<input type="text" name="article" id="article" required value=${param.article} >
-	<br>
-	<label for="description">Description</label>
-	<textarea name="description" id="description" rows="3" cols="20" required>${param.description}</textarea>
-	<br>
-	<label for="categorie">Filtres</label>
-	<select name="categorie" id="categorie" required>
-   		<c:forEach var="categorieDispo" items="${categories}">
-			<option value=${categorieDispo.libelleCategorie} ${categorieDispo.libelleCategorie==cat?"selected":""}>${categorieDispo.libelleCategorie}</option>				
-		</c:forEach>
-	</select>
-	<br>
-	<label for="photo">Photo de l'article : </label>
-	<input type="file" id="photo" name="photo" accept="image/*" required value=${nomPhoto}>
-	<br>
-	<label for="prix">Mise à prix : </label>
-	<input type="number" name="prix" step="10" required value=${param.prix}>
-	<br>
-	<label for="debut">Début de l'enchère : </label>
-	<input type="date" name="debut" id="debut" placeholder="aaaa-mm-jj" required value=${param.debut}>
-	<br>
-	<label for="fin">Fin de l'enchère : </label>
-	<input type="date" name="fin" id="fin" placeholder="aaaa-mm-jj" required value=${param.fin}>
-	<br>
+	<table>
+		<tr>
+			<td><label for="article">Article : </label></td>
+			<td><input type="text" name="article" id="article" required value=${param.article} ></td>
+		</tr>
+		<tr>
+			<td><label for="description">Description : </label></td>
+			<td><textarea name="description" id="description" required>${param.description}</textarea></td>
+		</tr>
+		<tr>
+			<td><label for="categorie">Filtres : </label></td>
+			<td>
+				<select name="categorie" id="categorie" required>
+			   		<c:forEach var="categorieDispo" items="${categories}">
+						<option value=${categorieDispo.libelleCategorie} ${categorieDispo.libelleCategorie==cat?"selected":""}>${categorieDispo.libelleCategorie}</option>				
+					</c:forEach>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label for="photo">Photo de l'article : </label></td>
+			<td><input type="file" id="photo" name="photo" accept="image/*" required value=${nomPhoto}></td>
+		</tr>
+		<tr>
+			<td><label for="prix">Mise à prix : </label></td>
+			<td><input class="number" type="number" name="prix" step="10" required value=${param.prix}></td>
+		</tr>
+		<tr>
+			<td><label for="debut">Début de l'enchère : </label></td>
+			<td><input type="date" name="debut" id="debut" placeholder="aaaa-mm-jj" required value=${param.debut}></td>
+		</tr>
+		<tr>
+			<td><label for="fin">Fin de l'enchère : </label></td>
+			<td><input type="date" name="fin" id="fin" placeholder="aaaa-mm-jj" required value=${param.fin}></td>
+		</tr>
+	</table>
 	<fieldset>
 		<legend>Retrait</legend>
-		
-		<label for="rue">Rue : </label>
-		<input type="text" name="rue" id="rue" value=${param.rue}>
-		<br>
-		<label for="cp">Code postal : </label>
-		<input type="text" name="cp" id="cp" value=${param.cp}>
-		<br>
-		<label for="ville">Ville : </label>
-		<input type="text" name="ville" id="ville" value=${param.ville}>
+		<table>
+			<tr>
+				<td><label for="rue">Rue : </label></td>
+				<td><input type="text" name="rue" id="rue" value=${param.rue}></td>
+			</tr>
+			<tr>
+				<td><label for="cp">Code postal : </label></td>
+				<td><input type="text" name="cp" id="cp" value=${param.cp}></td>
+			</tr>
+			<tr>
+				<td><label for="ville">Ville : </label></td>
+				<td><input type="text" name="ville" id="ville" value=${param.ville}></td>
+			</tr>
+		</table>
 	</fieldset>
-	<br>
-	<input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer">
-	<input type="button" name="annuler" id="annuler" value="Annuler">
+	<div class="bouton">
+		<input class="btn" type="submit" name="enregistrer" id="enregistrer" value="Enregistrer">
+		<input class="btn" type="button" name="annuler" id="annuler" value="Annuler">
+	</div>
+	
 </form>
 
 </body>
