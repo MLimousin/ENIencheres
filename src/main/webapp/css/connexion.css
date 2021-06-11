@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Hachi Maru Pop', cursive;
+}
+
+body {
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)),url(../img/connexion.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav img {
+    width: 80px;
+}
+
+.text-box {
+    width: 50%;
+    color: #fff;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.text-box h1 {
+    font-size: 50px;
+}
+
+.loginbox {
+    width: 420px;
+    height: 450px;
+    background: goldenrod;
+    color: #fff;
+    top: 50px;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, -10%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    opacity: 70%;
+    border-radius: 20px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.loginbox p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.loginbox input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginbox input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.loginbox input::placeholder {
+    color: white;
+    opacity: 50%;
+}
+
+.loginbox input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #c24c60;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+
+}
+
+.loginbox input[type="submit"]:hover {
+    cursor: pointer;
+    background: goldenrod;
+    color: whitesmoke;
+    box-shadow: 3px 3px 3px black;
+    transition: 0.5s;
+}
+
+.loginbox a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: aliceblue;
+}
+
+.loginbox a:hover {
+    color: royalblue;
+}
+
+.loginbox:hover {
+    opacity: 100%;
+    box-shadow: 3px 3px 5px black;
+    transition: 0.5s;
+}

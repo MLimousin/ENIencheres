@@ -353,8 +353,9 @@ nav .fa {
     margin-right: auto;
     border-radius: 30px;
     margin: auto;
-    width: 250px;
-    height: 200px;
+    width: auto;
+    height: 250px;
+    max-height : 100%
 }
 .liveAuction select {
     margin: 10px 20px;
@@ -371,6 +372,20 @@ nav .fa {
     flex-wrap : wrap;
     flex-direction : row-reverse;
     justify-content: space-around;
+}
+
+.liveAuction-col-horsConnexion {
+    display: flexbox;
+    flex-basis: 31%;
+    background: goldenrod;
+    border-radius: 40px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+}
+.liveAuction-col-horsConnexion h5{
+	font-size:15px;
+	font-weight : bold;
+	text-decoration : underline;
 }
 
 .liveAuction-col {

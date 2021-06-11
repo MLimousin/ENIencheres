@@ -103,7 +103,7 @@
 								<c:when test="${saisie==''}">
 									<c:choose>
 										<c:when test="${categorie=='Toutes'}">
-										<div class="liveAuction-col">
+										<div class="liveAuction-col-horsConnexion">
 										<table>
 											<tr>
 												<td>
@@ -126,7 +126,7 @@
 										</div>									
 										</c:when >
 										<c:when test="${articleVendu.noCategorie==numeroCategorie}">
-										<div class="liveAuction-col">
+										<div class="liveAuction-col-horsConnexion">
 										<table>
 											<tr>
 												<td>
@@ -154,7 +154,7 @@
 									<c:if test="${fn:containsIgnoreCase(articleVendu.nomArticle, saisie)}">
 										<c:choose>
 											<c:when test="${categorie=='Toutes'}">
-											<div class="liveAuction-col">
+											<div class="liveAuction-col-horsConnexion">
 												<table>
 													<tr>
 														<td>
@@ -177,7 +177,7 @@
 											</div>
 											</c:when >
 											<c:when test="${articleVendu.noCategorie==numeroCategorie}">
-											<div class="liveAuction-col">
+											<div class="liveAuction-col-horsConnexion">
 												<table>
 													<tr>
 														<td>
